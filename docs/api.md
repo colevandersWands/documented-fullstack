@@ -6,7 +6,7 @@
 
 <!-- BEGIN TREE -->
 
-![dependency graph](./API.svg)
+![dependency graph](./api.svg)
 
 <!-- END TREE -->
 

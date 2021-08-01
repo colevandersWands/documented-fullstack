@@ -166,7 +166,7 @@ const documentDirectory = async (
 
   const treeRegex = /(<!--[ \t]*BEGIN TREE[ \t]*-->)([\s\S]*)(<!--[ \t]*END TREE[ \t]*-->)/;
   // > [interactive graph](./${fileName}-dependency-graph.html)\n\n
-  const treeReplacer = `<!-- BEGIN TREE -->\n\n![dependency graph](./${graphPrefix}.svg)\n\n<!-- END TREE -->`;
+  const treeReplacer = `<!-- BEGIN TREE -->\n\n![dependency graph](./${graphPrefix.toLowerCase()}.svg)\n\n<!-- END TREE -->`;
   const treedReadme = tocedReadme.match(treeRegex)
     ? tocedReadme.replace(treeRegex, treeReplacer)
     : `${treeReplacer}\n\n${tocedReadme}`;
