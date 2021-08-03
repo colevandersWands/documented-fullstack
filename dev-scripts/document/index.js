@@ -20,7 +20,7 @@ visualizeDirectory('index.js', {
         collapsePattern: '^(node_modules/[^/]+)',
       },
     },
-    exclude: '(sandbox.js|(\\S)+.spec.js|dev-scripts)',
+    exclude: '(sandbox.js|(\\S)+.spec.js|dev-scripts|dev.js)',
   },
   filePrefix: 'entry-point',
 }).catch(err => console.error(err));

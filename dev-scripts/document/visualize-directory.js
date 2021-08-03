@@ -24,7 +24,7 @@ const visualizeDirectory = async (
       reporterOptions: {
         dot: { collapsePattern: '^(node_modules/[^/]+)' },
       },
-      exclude: '(sandbox.js|(\\S)+.spec.js|dev-scripts)',
+      exclude: '(sandbox.js|(\\S)+.spec.js|dev-scripts|dev.js)',
     },
     filePrefix = safeFileName(dirName),
   }

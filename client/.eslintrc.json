@@ -1,0 +1,103 @@
+{
+  "plugins": ["boundaries"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "overrides": [
+    {
+      "files": ["**/logic/**/*.js"],
+      "env": {
+        "browser": false
+      }
+    },
+    {
+      "files": ["**/api-calls/**/*.js"],
+      "env": {
+        "browser": false
+      },
+      "globals": {
+        "fetch": true
+      }
+    }
+  ],
+  "extends": ["plugin:boundaries/strict"],
+  "rules": {
+    "boundaries/element-types": [
+      2,
+      {
+        "default": "disallow",
+        "rules": [
+          { "from": "api-calls", "allow": ["logic"] },
+          {
+            "from": "components",
+            "allow": ["components", "handlers", "logic"]
+          },
+          { "from": "data", "allow": ["data"] },
+          {
+            "from": "handlers",
+            "allow": [
+              "api-calls",
+              "components",
+              "data",
+              "handlers",
+              "init",
+              "logic",
+              "procedures"
+            ]
+          },
+          {
+            "from": "init",
+            "allow": [
+              "components",
+              "data",
+              "handlers",
+              "init",
+              "listeners",
+              "logic",
+              "procedures"
+            ]
+          },
+          { "from": "listeners", "allow": ["handlers"] },
+          { "from": "logic", "allow": ["logic"] },
+          {
+            "from": "procedures",
+            "allow": [
+              "api-calls",
+              "components",
+              "data",
+              "handlers",
+              "init",
+              "logic",
+              "procedures"
+            ]
+          }
+        ]
+      }
+    ],
+
+    "import/prefer-default-export": 0,
+    "import/named": 2,
+    "import/no-cycle": 0,
+    "import/extensions": [1, { "js": "always" }]
+  },
+  "settings": {
+    "boundaries/elements": [
+      { "type": "api-calls", "pattern": "api-calls" },
+      { "type": "components", "pattern": "components" },
+      {
+        "type": "data",
+        "mode": "full",
+        "pattern": ["client/data.js", "data/**/*.js"]
+      },
+      { "type": "handlers", "pattern": "handlers" },
+      { "type": "init", "pattern": "init" },
+      { "type": "listeners", "pattern": "listeners" },
+      { "type": "logic", "pattern": "logic" },
+      { "type": "procedures", "pattern": "procedures" }
+    ],
+    "boundaries/ignore": ["**/*.spec.js", "**/sandbox.js"]
+  }
+}

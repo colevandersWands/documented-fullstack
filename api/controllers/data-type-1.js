@@ -8,6 +8,13 @@ const config = require('../../config');
 const SCHEMA = path.join(__dirname, '/..', config.DATA_DIR, '/_-schema.json');
 const DATA_PATH = path.join(__dirname, '/..', config.DATA_DIR, '/_-data.json');
 
+const doAThing = require('../logic/do-a-thing');
+const {
+  writeData,
+  readData,
+  deleteData,
+} = require('../data-access/local-json');
+
 const controllers = {
   /**
    *
