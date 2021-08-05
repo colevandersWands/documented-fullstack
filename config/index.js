@@ -1,8 +1,6 @@
 // let's import the default configuration
 const defaults = require('./default');
 
-console.log(process.env.NODE_ENV);
-
 // if the server is starting in a specific environment, we'll use that
 // if not, we will use "develop" by default
 const configEnv = process.env.NODE_ENV || 'development';
@@ -18,4 +16,6 @@ const config = require(configPath);
 
 // merge the imported config with the defaults
 // to form the final config
-module.exports = { ...defaults, ...config };
+const finalConfig = { ...defaults, ...config };
+
+module.exports = finalConfig;

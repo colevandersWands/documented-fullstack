@@ -25,7 +25,7 @@ if (config.MODE === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use('/', express.static(path.join(__dirname, 'client')));
+app.use('/', express.static(path.join(__dirname, config.STATIC_DIR)));
 
 app.use('/api', api);
 

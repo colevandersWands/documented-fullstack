@@ -12,10 +12,13 @@
 
 <!-- BEGIN TOC -->
 
+- .vscode
 - api
 - client
 - config
 - data
+- dist
+- planning
 - [index.js](#indexjs)
 
 ---
@@ -25,6 +28,10 @@
 ---
 
 <!-- BEGIN DOCS -->
+
+# /.vscode
+
+---
 
 # /api
 
@@ -39,6 +46,14 @@
 ---
 
 # /data
+
+---
+
+# /dist
+
+---
+
+# /planning
 
 ---
 

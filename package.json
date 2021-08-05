@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
+    "start": "NODE_ENV=production PORT=3000 DATA_DIR=data node index.js",
     "dev": "nodemon index.js",
     "document:client": "node ./dev-scripts/document client",
     "document:api": "node ./dev-scripts/document api",
     "document": "node ./dev-scripts/document client api",
-    "lint:css": "stylelint",
+    "lint:css": "stylelint './client/styles/**/*.css'",
     "lint:js": "eslint --max-warnings=0 --ext=.js --format=codeframe --fix",
-    "format": "prettier --write ./client"
+    "lint:html": "html-validate ./client",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "format": "prettier --write ./",
+    "build:js": "esbuild client/src/init/index.js --bundle --minify --format=esm --outfile=dist/bundle.min.js --loader:.html=text",
+    "build:css": "esbuild --bundle --minify client/styles/index.css --loader:.jpg=file --loader:.png=file --loader:.svg=file --loader:.gif=file --outfile=dist/bundle.min.css",
+    "build:client": "npm run build:js & npm run build:css && node dev-scripts/move-index-html.js && cp -R client/public/ dist/public/"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +29,7 @@
   },
   "devDependencies": {
     "dependency-cruiser": "^10.0.6",
+    "esbuild": "^0.12.18",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -34,8 +40,11 @@
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^3.4.0",
     "graphviz-cli": "^1.0.0",
+    "html-validate": "^5.2.0",
     "jsdoc-to-markdown": "^7.0.1",
     "nodemon": "^2.0.3",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
   }
 }
