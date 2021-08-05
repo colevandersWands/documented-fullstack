@@ -1,19 +1,11 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
 const { cruise } = require('dependency-cruiser');
 const { renderGraphFromSource } = require('graphviz-cli');
 
-const safeFileName = path =>
-  path
-    .split(path.sep)
-    .join('-')
-    .split('.')
-    .join('-')
-    .split(' ')
-    .join('-');
+const safeFileName = (fileName) =>
+  fileName.split(path.sep).join('-').split('.').join('-').split(' ').join('-');
 
 const visualizeDirectory = async (
   dirName,
@@ -37,7 +29,7 @@ const visualizeDirectory = async (
   try {
     fs.accessSync(SOURCE_DIR);
   } catch (err) {
-    console.log(`--- creating ${sourceRelativePath} directory ---`);
+    console.log(`--- creating ${dirName} directory ---`);
     fs.mkdirSync(SOURCE_DIR);
   }
 
@@ -46,15 +38,15 @@ const visualizeDirectory = async (
   // for (const project of cruised) {
 
   renderGraphFromSource({ input: cruised }, { format: 'svg' })
-    .then(svgGraph =>
+    .then((svgGraph) =>
       fs.writeFile(
-        path.join(GRAPH_PATH + '.svg'),
+        path.join(`${GRAPH_PATH}.svg`),
         svgGraph,
         'utf-8',
-        err => err && console.err(err)
+        (err) => err && console.err(err)
       )
     )
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 
   // // depcruise-wrap-stream-in-html is only available as CLI option
   // renderGraphFromSource({ input: cruised }, { format: 'html' })

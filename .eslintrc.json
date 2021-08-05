@@ -1,24 +1,14 @@
 {
-  "plugins": [
-    "jsdoc",
-    "prefer-arrow",
-    "prettier",
-    "spellcheck",
-    "filenames",
-    "folders",
-    "sonarjs",
-    "disable"
-  ],
-  "processor": "disable/disable",
+  "plugins": ["jsdoc", "prefer-arrow", "prettier", "filenames", "folders"],
+  "env": {
+    "node": true
+  },
   "overrides": [
     {
       "files": ["*.spec.js"],
       "rules": {
         "no-magic-numbers": 0,
         "no-undefined": 0
-      },
-      "settings": {
-        "disable/plugins": ["sonarjs"]
       },
       "env": {
         "jest": true
@@ -33,24 +23,15 @@
         "no-lone-blocks": 0,
         "jsdoc/require-jsdoc": 0,
         "no-undefined": 0,
-        "no-unused-vars": 0,
-        "spellcheck/spell-checker": 0
-      },
-      "settings": {
-        "disable/plugins": ["sonarjs"]
+        "no-unused-vars": 0
       },
       "env": {
         "jest": true
       }
     }
   ],
-  "ignorePatterns": ["dev-scripts/*.js"],
-  "extends": [
-    "eslint:recommended",
-    "airbnb-base",
-    "prettier",
-    "plugin:sonarjs/recommended"
-  ],
+  "ignorePatterns": ["dev-scripts/**/*.js"],
+  "extends": ["eslint:recommended", "airbnb-base", "prettier"],
   "rules": {
     "no-var": 1,
     "prefer-const": 1,
@@ -78,6 +59,8 @@
     "no-invalid-this": 1,
     "prefer-destructuring": 1,
     "no-nested-ternary": 0,
+    "strict": [1, "safe"],
+    "no-console": 0,
     "no-restricted-syntax": [
       0,
       {
@@ -92,11 +75,6 @@
     "prettier/prettier": ["error"],
 
     "prefer-arrow/prefer-arrow-functions": ["warn"],
-
-    "spellcheck/spell-checker": [
-      "warn",
-      { "minLength": 4, "identifiers": false, "strings": false }
-    ],
 
     "folders/match-regex": [2, "^(?!.*([-])\\1{1})[a-z-]+$", "src"],
     "filenames/match-regex": [2, "^(?!.*([-])\\1{1})[a-z-.spec]+$"],
@@ -128,6 +106,11 @@
     "jsdoc/require-throws": 1,
     "jsdoc/require-yields": 1,
     "jsdoc/require-yields-check": 1,
-    "jsdoc/valid-types": 1
+    "jsdoc/valid-types": 1,
+
+    "import/no-extraneous-dependencies": [
+      2,
+      { "devDependencies": ["dev-scripts/**/*.js"] }
+    ]
   }
 }

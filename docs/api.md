@@ -13,18 +13,14 @@
 <!-- BEGIN TOC -->
 
 - controllers
-  - [data-type-1.js](#apicontrollersdata-type-1js)
-  - [data-type-2.js](#apicontrollersdata-type-2js)
+  - [hello.js](#apicontrollershellojs)
 - data-access
-  - [local-json.js](#apidata-accesslocal-jsonjs)
+  - [hello.js](#apidata-accesshellojs)
 - logic
-  - [do-a-thing.js](#apilogicdo-a-thingjs)
 - middleware
-  - [authentication.js](#apimiddlewareauthenticationjs)
 - routes
-  - [data-type-1.js](#apiroutesdata-type-1js)
-  - [data-type-2.js](#apiroutesdata-type-2js)
-- [dev.js](#apidevjs)
+  - [hello.js](#apirouteshellojs)
+- utils
 - [index.js](#apiindexjs)
 
 ---
@@ -37,11 +33,7 @@
 
 # /controllers
 
-<details><summary><a href="../../api/controllers/data-type-1.js" id="apicontrollersdata-type-1js">../api/controllers/data-type-1.js</a></summary>
-
-</details>
-
-<details><summary><a href="../../api/controllers/data-type-2.js" id="apicontrollersdata-type-2js">../api/controllers/data-type-2.js</a></summary>
+<details><summary><a href="../../api/controllers/hello.js" id="apicontrollershellojs">../api/controllers/hello.js</a></summary>
 
 </details>
 
@@ -49,53 +41,44 @@
 
 # /data-access
 
-<details><summary><a href="../../api/data-access/local-json.js" id="apidata-accesslocal-jsonjs">../api/data-access/local-json.js</a></summary>
+<details><summary><a href="../../api/data-access/hello.js" id="apidata-accesshellojs">../api/data-access/hello.js</a></summary>
 
 ## Functions
 
 <dl>
-<dt><a href="#constructFilePath">constructFilePath(ownerName)</a> ⇒ <code>String</code></dt>
-<dd></dd>
-<dt><a href="#readData">readData(ownerName)</a> ⇒ <code>Promise.&lt;{exists: Boolean, data: Object}&gt;</code></dt>
-<dd></dd>
-<dt><a href="#writeData">writeData(ownerName, data)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
-<dd></dd>
+<dt><a href="#constructFilePath">constructFilePath(fileName)</a> ⇒ <code>string</code></dt>
+<dd><p>Generates an absolute path for a specific file in the app&#39;s data.</p>
+</dd>
+<dt><a href="#readHello">readHello()</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>Reads the contents of &quot;hello.txt&quot;.</p>
+</dd>
 </dl>
 
 <a name="constructFilePath"></a>
 
-## constructFilePath(ownerName) ⇒ <code>String</code>
+## constructFilePath(fileName) ⇒ <code>string</code>
 
-| Param     | Type                |
-| --------- | ------------------- |
-| ownerName | <code>String</code> |
+Generates an absolute path for a specific file in the app's data.
 
-<a name="readData"></a>
+**Returns**: <code>string</code> - An absolute path to that file.
 
-## readData(ownerName) ⇒ <code>Promise.&lt;{exists: Boolean, data: Object}&gt;</code>
+| Param    | Type                | Description       |
+| -------- | ------------------- | ----------------- |
+| fileName | <code>string</code> | The file to read. |
 
-| Param     | Type                |
-| --------- | ------------------- |
-| ownerName | <code>String</code> |
+<a name="readHello"></a>
 
-<a name="writeData"></a>
+## readHello() ⇒ <code>Promise.&lt;string&gt;</code>
 
-## writeData(ownerName, data) ⇒ <code>Promise.&lt;void&gt;</code>
+Reads the contents of "hello.txt".
 
-| Param     | Type                |
-| --------- | ------------------- |
-| ownerName | <code>String</code> |
-| data      | <code>String</code> |
+**Returns**: <code>Promise.&lt;string&gt;</code> - Text content from the "hello.txt" file.
 
 </details>
 
 ---
 
 # /logic
-
-<details><summary><a href="../../api/logic/do-a-thing.js" id="apilogicdo-a-thingjs">../api/logic/do-a-thing.js</a></summary>
-
-</details>
 
 ---
 
@@ -105,19 +88,15 @@
 
 # /routes
 
-<details><summary><a href="../../api/routes/data-type-1.js" id="apiroutesdata-type-1js">../api/routes/data-type-1.js</a></summary>
-
-</details>
-
-<details><summary><a href="../../api/routes/data-type-2.js" id="apiroutesdata-type-2js">../api/routes/data-type-2.js</a></summary>
+<details><summary><a href="../../api/routes/hello.js" id="apirouteshellojs">../api/routes/hello.js</a></summary>
 
 </details>
 
 ---
 
-<details><summary><a href="../../api/dev.js" id="apidevjs">../api/dev.js</a></summary>
+# /utils
 
-</details>
+---
 
 <details><summary><a href="../../api/index.js" id="apiindexjs">../api/index.js</a></summary>
 

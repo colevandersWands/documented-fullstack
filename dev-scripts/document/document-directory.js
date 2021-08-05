@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -7,14 +5,8 @@ const util = require('util');
 const jsdocToMarkdown = require('jsdoc-to-markdown');
 const prettier = require('prettier');
 
-const safeFileName = path =>
-  path
-    .split(path.sep)
-    .join('-')
-    .split('.')
-    .join('-')
-    .split(' ')
-    .join('-');
+const safeFileName = (path) =>
+  path.split(path.sep).join('-').split('.').join('-').split(' ').join('-');
 
 const documentDirectory = async (
   dirName,
@@ -28,7 +20,7 @@ const documentDirectory = async (
 ) => {
   const SOURCE_DIR = path.normalize(path.join(__dirname, '..', '..', dirName));
   const DOCS_PATH = path.normalize(
-    path.join(__dirname, '..', '..', 'docs', fileName + '.md')
+    path.join(__dirname, '..', '..', 'docs', `${fileName}.md`)
   );
 
   try {
@@ -67,14 +59,14 @@ const documentDirectory = async (
         return 0;
       });
 
-      for (let nextPath of paths) {
+      for (const nextPath of paths) {
         if (
           /.spec./i.test(nextPath) ||
           /.test./i.test(nextPath) ||
           /sandbox.js/i.test(nextPath) ||
           /node_modules/i.test(nextPath) ||
           /.git/i.test(nextPath) ||
-          ignore.some(toIgnore => new RegExp(toIgnore, 'i').test(nextPath))
+          ignore.some((toIgnore) => new RegExp(toIgnore, 'i').test(nextPath))
         ) {
           continue;
         }
@@ -141,10 +133,10 @@ const documentDirectory = async (
         console.log(relativePath);
         newDocs +=
           // '\n\n---\n\n' +
-          '\n\n' +
-          `<details><summary><a href="../${relativePath}" id="${anchorId}">${relativePath}</a></summary>\n\n` +
-          kindlessDocs +
-          '</details>';
+          `${
+            '\n\n' +
+            `<details><summary><a href="../${relativePath}" id="${anchorId}">${relativePath}</a></summary>\n\n`
+          }${kindlessDocs}</details>`;
       }
     } catch (err) {
       console.error(err);
@@ -158,26 +150,30 @@ const documentDirectory = async (
     oldReadme = await util.promisify(fs.readFile)(DOCS_PATH, 'utf-8');
   }
 
-  const tocRegex = /(<!--[ \t]*BEGIN TOC[ \t]*-->)([\s\S]*)(<!--[ \t]*END TOC[ \t]*-->)/;
+  const tocRegex =
+    /(<!--[ \t]*BEGIN TOC[ \t]*-->)([\s\S]*)(<!--[ \t]*END TOC[ \t]*-->)/;
   const tocReplacer = `<!-- BEGIN TOC -->${newToc}\n\n---\n\n<!-- END TOC -->`;
   const tocedReadme = oldReadme.match(tocRegex)
     ? oldReadme.replace(tocRegex, tocReplacer)
     : `${tocReplacer}\n\n---\n\n${oldReadme}`;
 
-  const treeRegex = /(<!--[ \t]*BEGIN TREE[ \t]*-->)([\s\S]*)(<!--[ \t]*END TREE[ \t]*-->)/;
+  const treeRegex =
+    /(<!--[ \t]*BEGIN TREE[ \t]*-->)([\s\S]*)(<!--[ \t]*END TREE[ \t]*-->)/;
   // > [interactive graph](./${fileName}-dependency-graph.html)\n\n
   const treeReplacer = `<!-- BEGIN TREE -->\n\n![dependency graph](./${graphPrefix.toLowerCase()}.svg)\n\n<!-- END TREE -->`;
   const treedReadme = tocedReadme.match(treeRegex)
     ? tocedReadme.replace(treeRegex, treeReplacer)
     : `${treeReplacer}\n\n${tocedReadme}`;
 
-  const titleRegex = /(<!--[ \t]*BEGIN title[ \t]*-->)([\s\S]*)(<!--[ \t]*END title[ \t]*-->)/;
+  const titleRegex =
+    /(<!--[ \t]*BEGIN title[ \t]*-->)([\s\S]*)(<!--[ \t]*END title[ \t]*-->)/;
   const titleReplacer = `<!-- BEGIN title -->\n# ${title}\n\n<!-- END title -->`;
   const titledReadme = treedReadme.match(titleRegex)
     ? treedReadme.replace(titleRegex, titleReplacer)
     : `${titleReplacer}\n\n${treedReadme}`;
 
-  const docsRegex = /(<!--[ \t]*BEGIN DOCS[ \t]*-->)([\s\S]*)(<!--[ \t]*END DOCS[ \t]*-->)/;
+  const docsRegex =
+    /(<!--[ \t]*BEGIN DOCS[ \t]*-->)([\s\S]*)(<!--[ \t]*END DOCS[ \t]*-->)/;
   const docsReplacer = `<!-- BEGIN DOCS -->${newDocs}\n\n<!-- END DOCS -->`;
   const newDocsDocument = titledReadme.match(docsRegex)
     ? titledReadme.replace(docsRegex, docsReplacer)
@@ -188,13 +184,15 @@ const documentDirectory = async (
     formattedDocs = prettier.format(formattedDocs, {
       parser: 'markdown',
     });
-  } catch (o_0) {}
+  } catch (o_0) {
+    console.error(o_0);
+  }
 
   fs.writeFile(
     DOCS_PATH,
     formattedDocs,
     'utf-8',
-    err => err && console.error(err)
+    (err) => err && console.error(err)
   );
 };
 

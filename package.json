@@ -1,17 +1,17 @@
 {
-  "name": "refactored-dynamic-example",
+  "name": "fullstack-starter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "NODE_ENV=production node index.js",
     "dev": "nodemon index.js",
-    "tree": "depcruise --prefix ../ --include-only \"^\" --collapse '^(node_modules/[^/]+)' --exclude '(sandbox.js|(\\S)+.spec.js|dev-scripts)' --do-not-follow '^node_modules'  --output-type dot ./ | graphviz -Tsvg -odocs/dependency-graph.svg",
-    "tree:html": "depcruise --prefix ../ --include-only \"^=\" --exclude '(sandbox.js|(\\S)+.spec.js)' node_modules *.spec.js --output-type dot ./ | graphviz -Tsvg | depcruise-wrap-stream-in-html > docs/dependency-graph.html",
-    "document:graphs": "node ./dev-scripts/document.js ../ && npm run tree && npm run tree:html",
     "document:client": "node ./dev-scripts/document client",
     "document:api": "node ./dev-scripts/document api",
-    "document": "node ./dev-scripts/document client api"
+    "document": "node ./dev-scripts/document client api",
+    "lint:css": "stylelint",
+    "lint:js": "eslint --max-warnings=0 --ext=.js --format=codeframe --fix",
+    "format": "prettier --write ./client"
   },
   "author": "",
   "license": "ISC",
@@ -24,8 +24,18 @@
   },
   "devDependencies": {
     "dependency-cruiser": "^10.0.6",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-folders": "^1.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^32.3.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^3.4.0",
     "graphviz-cli": "^1.0.0",
     "jsdoc-to-markdown": "^7.0.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "prettier": "^2.3.2"
   }
 }

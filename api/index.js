@@ -1,15 +1,19 @@
 const express = require('express');
 
-const dataType1 = require('./routes/data-type-1');
-const dataType2 = require('./routes/data-type-2');
-
-const authenticate = require('./middleware/authentication');
+const helloRoutes = require('./routes/hello');
 
 const router = express.Router();
 
-router.use(authenticate);
+router.use((req, res, next) => {
+  console.log('api!');
+  next();
+});
 
-router.use(dataType1);
-router.use(dataType2);
+router.get('/', (req, res) => {
+  res.send('api!');
+});
+
+// use routes
+router.use('/hello', helloRoutes);
 
 module.exports = router;

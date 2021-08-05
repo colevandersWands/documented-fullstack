@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
@@ -16,9 +14,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-/**
- * asdfasd
- */
 app.use(
   morgan('combined', {
     stream: fs.createWriteStream(path.join(__dirname, 'access.log'), {
@@ -34,16 +29,17 @@ app.use('/', express.static(path.join(__dirname, 'client')));
 
 app.use('/api', api);
 
-/**
- * yuiop
- */
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   console.error(err.stack);
   res.status(500).end();
 });
 
-app.listen(config.PORT, () => {
-  console.log(
-    `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
-  );
+app.listen(config.PORT, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(
+      `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
+    );
+  }
 });
