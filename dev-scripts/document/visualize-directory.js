@@ -12,9 +12,9 @@ const visualizeDirectory = async (
   {
     options = {
       outputType: 'dot',
-      doNotFollow: { path: 'node_modules' },
+      doNotFollow: { path: ['node_modules', 'lib'] },
       reporterOptions: {
-        dot: { collapsePattern: '^(node_modules/[^/]+)' },
+        dot: { collapsePattern: '^((node_modules|lib)/[^/]+)' },
       },
       exclude: '(sandbox.js|(\\S)+.spec.js|dev-scripts|dev.js)',
     },

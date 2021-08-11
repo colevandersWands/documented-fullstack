@@ -12,10 +12,6 @@ import { footer } from './footer.js';
 export const page = (bodyComponent, routes) => {
   const container = document.createElement('div');
 
-  fetch(window.location.origin + '/api/hello')
-    .then((res) => res.text())
-    .then((hello) => console.log(hello));
-
   container.appendChild(navbar(routes));
   if (typeof bodyComponent === 'function') {
     container.appendChild(bodyComponent());

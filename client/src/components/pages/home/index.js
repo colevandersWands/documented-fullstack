@@ -5,7 +5,7 @@ import { inputGreeting } from '../../shared/input-greeting.js';
  *
  * @returns {HTMLDivElement} A rendered home page.
  */
-export const home = () => {
+export const home = async () => {
   const container = document.createElement('div');
   container.className = 'body';
   container.innerHTML = 'home: ';

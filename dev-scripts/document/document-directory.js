@@ -65,6 +65,7 @@ const documentDirectory = async (
           /.test./i.test(nextPath) ||
           /sandbox.js/i.test(nextPath) ||
           /node_modules/i.test(nextPath) ||
+          /lib/i.test(nextPath) ||
           /.git/i.test(nextPath) ||
           ignore.some((toIgnore) => new RegExp(toIgnore, 'i').test(nextPath))
         ) {
