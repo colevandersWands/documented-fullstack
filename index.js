@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const path = require('path');
 
@@ -21,15 +23,21 @@ app.use(
     }),
   })
 );
+
 if (config.MODE === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use('/', express.static(path.join(__dirname, config.STATIC_DIR)));
-
 app.use('/api', api);
 
-app.use((err, req, res) => {
+app.use('/__static__', express.static(path.join(__dirname, config.STATIC_DIR)));
+
+app.get('/**', (req, res) => {
+  res.sendFile(path.join(__dirname, config.STATIC_DIR, 'index.html'));
+});
+
+/* eslint-disable */
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).end();
 });

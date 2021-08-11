@@ -1,5 +1,3 @@
-import { config } from '../config.js';
-
 /**
  * Fetches text from the /api/hello route.
  *
@@ -10,7 +8,7 @@ import { config } from '../config.js';
  */
 export const hello = async () => {
   // --- declare your resource's URL ---
-  const URL = `${config.apiOrigin}/hello`;
+  const URL = `${window.location.origin}/api/hello`;
 
   // --- fetch, validate and parse the API data (this works!) ---
   const encodedURL = encodeURI(URL);

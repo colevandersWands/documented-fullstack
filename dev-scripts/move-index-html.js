@@ -13,8 +13,8 @@ fs.readFile(
       console.error(err);
     } else {
       const pathAligned = content
-        .replace('./src/init/index.js', './bundle.min.js')
-        .replace('./styles/index.css', './bundle.min.css');
+        .replace('__static__/src/init/index.js', '__static__/bundle.min.js')
+        .replace('__static__/styles/index.css', '__static__/bundle.min.css');
       fs.writeFile(
         path.join(__dirname, '..', 'dist', 'index.html'),
         pathAligned,

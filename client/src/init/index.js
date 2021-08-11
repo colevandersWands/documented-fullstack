@@ -1,7 +1,7 @@
-import { hello } from '../api-calls/hello.js';
-import { header } from '../components/header.js';
+/**
+ * Resolves the router to the initial frontend route
+ */
 
-hello().then((greeting) => {
-  const renderedGreeting = header(greeting);
-  document.body.appendChild(renderedGreeting);
-});
+import { router } from './router.js';
+
+router.resolve();
